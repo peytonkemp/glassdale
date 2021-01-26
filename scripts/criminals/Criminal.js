@@ -1,6 +1,6 @@
   export const Criminal = (criminal) => {
     return `
-        <div class="Criminal">
+        <div class="criminal">
             <p class="name">${criminal.name}</p>
             <p class="age">Age: ${criminal.age}</p>
             <p class="crime">Crime: ${criminal.conviction}</p>

@@ -1,15 +1,16 @@
 .criminalsList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 
 
-.Criminal {
-border: 1px dotted rgb(255, 0, 0);
-padding: 10px;
-margin: 10px;
-flex: 15%;
+.criminal {
+    border: 1px dotted rgb(255, 0, 0);
+    padding: 10px;
+    margin: 10px;
+    flex: 15%;
 }
 
 
@@ -17,6 +18,7 @@ flex: 15%;
 .officersList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 
