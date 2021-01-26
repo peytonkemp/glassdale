@@ -6,12 +6,12 @@ const criminalsContatiner = document.querySelector(".criminalsContainer")
 export const CriminalList = () => {
     getCriminals()
     .then(() => {
-        const criminalArray = useCriminals()
+        const criminalsArray = useCriminals()
 
         let criminalsHTMLRepresentations = ""
 
-        for (const criminalObj of criminalArray) {
-            criminalsHTMLRepresentations += Criminal(criminalObj)
+        for (const criminal of criminalsArray) {
+            criminalsHTMLRepresentations += Criminal(criminal)
         }
 
         criminalsContatiner.innerHTML = `
