@@ -1,0 +1,29 @@
+.criminalsList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.Criminal {
+border: 1px dotted rgb(255, 0, 0);
+padding: 10px;
+margin: 10px;
+flex: 15%;
+}
+
+
+
+.officersList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.officer {
+border: 1px dotted rgb(15, 30, 198);
+padding: 10px;
+margin: 10px;
+flex: 15%;
+}
