@@ -29,10 +29,11 @@ export const OfficerSelect = () => {
 }
 
 const render = officerCollection => {
-    contentTarget.innerHTML =  `
-    <select class="dropdown" id="officerSelect">
-    <option value="0">Please select an officer...</option>
-    ${officerCollection.map(officer => `<option value="${officer.name}">${officer.name}</option>`).join("")}
-    </select>
+    contentTarget.innerHTML = `
+        <select class="dropdown" id="officerSelect">
+            <option value="0">Please select an officer...</option>
+            ${officerCollection.map(officer => `<option value="${officer.name}">${officer.name}</option>`).join("")
+        }
+        </select>
     `
 }
