@@ -1,12 +1,30 @@
+import { useConvictions, getConvictions } from "./ConvictionProvider.js"
 /*
     Which element in your HTML contains all components?
     That's your Event Hub. Get a reference to it here.
 */
-import { useConvictions, getConvictions } from "./ConvictionProvider.js"
 
+const eventHub = document.querySelector(".container")
 const contentTarget = document.querySelector(".filters__crime")
 
 // On the event hub, listen for a "change" event.
+eventHub.addEventListener("change", changeEvent => {
+    // Only do this if the `crimeSelect` element was changed
+    if (changeEvent.target.id === "crimeSelect") {
+        // debugger
+        // Create custom event. Provide an appropriate name.
+        const customEvent = new CustomEvent("crimeChosen", {
+            detail: {
+                crimeThatWasChosen: changeEvent.target.value
+            }
+        })
+
+        // Dispatch to event hub
+        eventHub.dispatchEvent(customEvent)
+    }
+})
+
+
 export const ConvictionSelect = () => {
     getConvictions()
         .then(() => {
