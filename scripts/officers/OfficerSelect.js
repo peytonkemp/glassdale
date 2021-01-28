@@ -16,7 +16,7 @@ eventHub.addEventListener("change", changeEvent => {
         })
 
         // Dispatch event to event hub
-        eventHub.dispatchEvent(customEvent)
+        eventHub.dispatchEvent(officerSelectedCustomEvent)
     }
 })
 
