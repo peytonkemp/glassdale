@@ -29,3 +29,7 @@ padding: 10px;
 margin: 10px;
 flex: 15%;
 }
+
+.notesAside {
+    float: right;
+}
