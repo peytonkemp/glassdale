@@ -31,7 +31,7 @@ export const CriminalList = () => {
 // Listen for the "crimeChosen" custom event you dispatched in ConvictionSelect
 eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
     if (crimeChosenEvent.detail.crimeThatWasChosen !== "0") {
-      // debugger
+      debugger
       /* 
         We have the the id of the conviction that the user selected from the drop down (crimeChosenEvent.target.crimeThatWasChosen). But each criminal object has the name of the crime they were convicted for. So we need to get the name of the conviction associated with the unique identifier. To get the name, we get the conviction object which has the property for name. 
       */
