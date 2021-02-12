@@ -1,36 +1,12 @@
 {
   "notes": [
     {
-      "text": "text",
-      "suspect": "name",
-      "date": "01/28/2021",
-      "author": "Peyton",
-      "intuition": "",
-      "id": 1
-    },
-    {
-      "text": "text",
-      "suspect": "name",
-      "date": "01/28/2021",
-      "author": "Peyton",
-      "intuition": "",
-      "id": 2
-    },
-    {
-      "text": "text",
-      "suspect": "name",
-      "date": "01/28/2021",
-      "author": "Peyton",
-      "intuition": "",
-      "id": 3
-    },
-    {
       "text": "test",
-      "suspect": "test",
-      "date": "",
+      "criminalId": 1,
+      "date": "2021-02-12",
       "author": "test",
       "intuition": "test",
-      "id": 4
+      "id": 1
     }
   ]
 }

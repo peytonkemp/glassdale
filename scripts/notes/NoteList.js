@@ -1,5 +1,8 @@
 import { getNotes, useNotes } from "./NoteDataProvider.js";
 import { NoteHTMLConverter } from "./Note.js";
+import { getCriminals, useCriminals } from "../criminals/CriminalProvider.js";
+
+// import { useCriminals } from '../criminals/CriminalProvider.js'
 
 // Query the DOM for the element that your notes will be added to 
 const contentTarget = document.querySelector(".notesContainer")
@@ -10,9 +13,21 @@ eventHub.addEventListener("showNotesClicked", customEvent => {
     NoteList()
 })
 
-const render = (noteArray) => {
+// Standard list function you're used to writing by now. BUT, don't call this in main.js! Why not?
+export const NoteList = () => {
+    getNotes()
+    .then(getCriminals)
+        .then(() => {
+            const allNotes = useNotes()
+            const allCriminals = useCriminals()
+            render(allNotes, allCriminals)
+        })
+}
+
+const render = (noteArray, criminalArray) => {
     const allNotesConvertedToStrings = noteArray.map(noteObject => {
-    return NoteHTMLConverter(noteObject)
+    const relatedCriminalObject = criminalArray.find(criminal => criminal.id === noteObject.criminalId)
+    return NoteHTMLConverter(noteObject, relatedCriminalObject)
 
     }).join("")
 
@@ -24,17 +39,36 @@ const render = (noteArray) => {
         `
 }
 
-// Standard list function you're used to writing by now. BUT, don't call this in main.js! Why not?
-export const NoteList = () => {
-    getNotes()
-        .then(() => {
-            const allNotes = useNotes()
-            render(allNotes)
-        })
-}
 
 eventHub.addEventListener("noteStateChanged", event => {
     if (contentTarget.innerHTML !== "") {
       NoteList()
     }
   })
+
+
+
+//   const render = (noteCollection, criminalCollection) => {
+//     contentTarget.innerHTML = noteCollection.map(note => {
+//         // Find the related criminal
+//         const relatedCriminal = criminalCollection.find(criminal => criminal.id === note.criminalId)
+
+//         return `
+//             <section class="note">
+//                 <h2>Note about ${relatedCriminal.name}</h2>
+//                 ${note.noteText}
+//             </section>
+//         `
+//     })
+// }
+
+// const NoteList = () => {
+//     getNotes()
+//         .then(getCriminals)
+//         .then(() => {
+//             const notes = useNotes()
+//             const criminals = useCriminals()
+
+//             render(notes, criminals)
+//         })
+// }
