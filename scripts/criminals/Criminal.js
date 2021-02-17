@@ -11,7 +11,7 @@
             <div>
                 <h4>Facilities</h4>
                 <ul>
-                    ${facilitiesArray.map(f => `<li>${f.facilityName}</li>`).join("")}
+                    ${facilitiesArray.map(f => `<li>${f.facilitiesArray}</li>`).join("")}
                 </ul>
             </div>
             ${ShowAssociatesButton(criminal)}

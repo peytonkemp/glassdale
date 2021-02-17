@@ -15,7 +15,7 @@ export const CriminalList = () => {
         const criminalsArray = useCriminals()
         const criminalFacilityArray = useCriminalFacilities()
         const facilitiesArray = useFacilities()
-        renderToDom(criminalsArray)
+        renderToDom(criminalsArray, criminalFacilityArray, facilitiesArray)
 
     })
 }
@@ -27,11 +27,11 @@ const renderToDom = (criminalCollection, crimFacCollection, facilityCollection) 
     for (const criminal of criminalCollection) {
         const arrayOfCrimFacObjects = crimFacCollection.filter(criminalFacility => criminal.id === criminalFacility.criminalId)
 
-        crimFacCollection.map(criminalFacility => {
+        const arrayOfFacilityObjects = crimFacCollection.map(criminalFacility => {
           return facilityCollection.find(facility = facility.id === criminalFacility.facilityId)
         })
 
-        criminalsHTMLRepresentations += Criminal(criminal, arrayOfCrimFacObjects, )
+        criminalsHTMLRepresentations += Criminal(criminal, arrayOfCrimFacObjects, arrayOfFacilityObjects)
     }
 
     criminalsContainer.innerHTML = `
@@ -45,7 +45,7 @@ const renderToDom = (criminalCollection, crimFacCollection, facilityCollection) 
 // Listen for the "crimeChosen" custom event you dispatched in ConvictionSelect
 eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
     if (crimeChosenEvent.detail.crimeThatWasChosen !== "0") {
-      debugger
+      // debugger
       /* 
         We have the the id of the conviction that the user selected from the drop down (crimeChosenEvent.target.crimeThatWasChosen). But each criminal object has the name of the crime they were convicted for. So we need to get the name of the conviction associated with the unique identifier. To get the name, we get the conviction object which has the property for name. 
       */
@@ -59,7 +59,7 @@ eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
         return convictionObj.id === parseInt(crimeChosenEvent.detail.crimeThatWasChosen)
       })
       // debugger
-      console.log(chosenConvictionObject.name)
+      // console.log(chosenConvictionObject.name)
   
       /*
           Filter the criminals application state down to the people that committed the crime
