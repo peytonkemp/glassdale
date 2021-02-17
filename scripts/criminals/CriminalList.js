@@ -1,14 +1,37 @@
 import { getCriminals, useCriminals } from "./CriminalProvider.js"
 import { Criminal } from "./Criminal.js"
 import { useConvictions } from "./../convictions/ConvictionProvider.js"
+import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js"
+import { getFacilities, useFacilities } from "./../facility/FacilityProvider.js"
 
 const eventHub = document.querySelector(".container")
 const criminalsContainer = document.querySelector(".criminalsContainer")
 
-const renderToDom = (criminalCollection) => {
+export const CriminalList = () => {
+    getCriminals()
+    .then(getCriminalFacilities)
+    .then(getFacilities)
+      .then(() => {
+        const criminalsArray = useCriminals()
+        const criminalFacilityArray = useCriminalFacilities()
+        const facilitiesArray = useFacilities()
+        renderToDom(criminalsArray)
+
+    })
+}
+
+
+const renderToDom = (criminalCollection, crimFacCollection, facilityCollection) => {
     let criminalsHTMLRepresentations = ""
+
     for (const criminal of criminalCollection) {
-        criminalsHTMLRepresentations += Criminal(criminal)
+        const arrayOfCrimFacObjects = crimFacCollection.filter(criminalFacility => criminal.id === criminalFacility.criminalId)
+
+        crimFacCollection.map(criminalFacility => {
+          return facilityCollection.find(facility = facility.id === criminalFacility.facilityId)
+        })
+
+        criminalsHTMLRepresentations += Criminal(criminal, arrayOfCrimFacObjects, )
     }
 
     criminalsContainer.innerHTML = `
@@ -18,15 +41,6 @@ const renderToDom = (criminalCollection) => {
     </section>`
 }
 
-
-export const CriminalList = () => {
-    getCriminals()
-    .then(() => {
-        const criminalsArray = useCriminals()
-        renderToDom(criminalsArray)
-
-    })
-}
 
 // Listen for the "crimeChosen" custom event you dispatched in ConvictionSelect
 eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
@@ -53,6 +67,8 @@ eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
   
       // Get a copy of the array of criminals from the data provider
       const criminalsArray = useCriminals()
+      const crimFacArray = useCriminalFacilities()
+      const facilitiesArray = useFacilities()
   
       /*
         Now that we have the name of the chosen crime, filter the criminals data down to the people that committed the crime
@@ -65,7 +81,7 @@ eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
           Then invoke render() and pass the filtered collection as
           an argument
       */
-      renderToDom(filteredCriminalsArray)
+      renderToDom(filteredCriminalsArray, crimFacArray, facilitiesArray)
     }
   })
 
@@ -82,6 +98,9 @@ eventHub.addEventListener("crimeChosen", crimeChosenEvent => {
               return true;
           }
       })
+      const crimFacArray = useCriminalFacilities()
+      const facilitiesArray = useFacilities()
+
       //render filtered criminals to DOM
-      renderToDom(filteredCriminalsArray)
+      renderToDom(filteredCriminalsArray, crimFacArray, facilitiesArray)
   })
